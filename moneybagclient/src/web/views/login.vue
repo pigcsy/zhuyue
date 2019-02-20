@@ -40,33 +40,33 @@ export default {
     methods: {
         logIn () {
             // 者月钱包
-            // const that = this; 
-            // const result = that.$refs.mobile;
-            // if (result.valid) {
-            //     that.loading = true;
-            //     that.disabled = true;
-            //     setTimeout(() => {
-            //         User.logIn({ "mobile": that.mobile }).then((res) => {
-            //             if (res.code === 10001) {
-            //                 Notify({ mes: "登录成功", timeout: 2000, callback: () => {
-            //                     that.loading = false;
-            //                     that.$router.push({ "path": "/" });
-            //                 }});  
-            //             } else {
-            //                 Notify({ mes: "加载失败 , ".concat(res.result), timeout: 3000});
-            //                 that.disabled = false;
-            //                 that.loading = false;
-            //             }
-            //         }, (err) => {
-            //             Notify({ mes: "加载失败 , 网络异常", timeout: 3000});
-            //             that.disabled = false;
-            //             that.loading = false;
-            //             console.error(err);
-            //         });   
-            //     }, 500);
-            // } else {
-            //     Notify({ mes: ((result.errorCode === "NOT_NULL") ? "手机号码不允许为空. " : "手机号码不正确. "), timeout: 100000});
-            // }
+            const that = this; 
+            const result = that.$refs.mobile;
+            if (result.valid) {
+                that.loading = true;
+                that.disabled = true;
+                setTimeout(() => {
+                    User.logIn({ "mobile": that.mobile }).then((res) => {
+                        if (res.code === 10001) {
+                            Notify({ mes: "登录成功", timeout: 2000, callback: () => {
+                                that.loading = false;
+                                that.$router.push({ "path": "/" });
+                            }});  
+                        } else {
+                            Notify({ mes: "加载失败 , ".concat(res.result), timeout: 3000});
+                            that.disabled = false;
+                            that.loading = false;
+                        }
+                    }, (err) => {
+                        Notify({ mes: "加载失败 , 网络异常", timeout: 3000});
+                        that.disabled = false;
+                        that.loading = false;
+                        console.error(err);
+                    });   
+                }, 500);
+            } else {
+                Notify({ mes: ((result.errorCode === "NOT_NULL") ? "手机号码不允许为空. " : "手机号码不正确. "), timeout: 100000});
+            }
         },
     },
     beforeCreate () {
