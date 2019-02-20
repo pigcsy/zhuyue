@@ -1,0 +1,85 @@
+/**
+ * mu-app-item Scss
+ * @JsName mu-app-item
+ * @Description mu-app-item（ 列表子项目 :: 贷超 ）自定义组件 Scss 样式.
+ * @DateTime 2018-12-22 20:39:22
+ * @author csy
+ */
+.mu-app-item {
+    margin: 12px auto;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    box-shadow: 2px 2px 2px 2px #F5F5F9;
+    .item-section {
+        display: flex;
+        .blockmark-left {
+            width: 23%;
+            text-align: center;
+            .icon {
+                width: 50px;
+                height: 50px;
+                margin: 18px auto;
+                border-radius: 50px;
+                border: 1px solid #F5F5F9;
+            };
+        };
+        .blockmark-right {
+            width: 77%;
+            .blockmark-subject {
+                display: flex;
+                .subject {
+                    width: 65%;
+                    .title {
+                        color: #000000;
+                        font-size: 15px;
+                        margin-top: 15px;
+                    };
+                    .synopsis {
+                        color: #6C6C6C;
+                        font-size: 12px;
+                        margin-top: 3px;
+                    };
+                };
+                .ratio {
+                    width: 35%;
+                    margin-top: 13px;
+                    text-align: center;
+                    .worth {
+                        color: #5A62B7;
+                        font-size: 1.25rem;
+                        span {
+                            font-size: 14px
+                        };
+                    };
+                    .column {
+                        margin-top: 3px;
+                        color: #6C6C6C;
+                        font-size: 12px;
+                    };
+                };
+            };
+            .blockmark {
+                display: flex;
+                height: 18px;
+                color: #6c6c6c;
+                font-size: 12px;
+                line-height: 18px;
+                margin: 12px auto;
+                .maxQuota {
+                    width: 65%;
+                    .quota {
+                        margin-left: 3px;
+                        color: #E88939;
+                    };
+                };
+                .register {
+                    width: 35%;
+                    color: #5A62B7;
+                    font-size: .85rem;
+                    margin: 0 auto;
+                    text-align: center;
+                };
+            };
+        };
+    };
+};

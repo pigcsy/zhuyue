@@ -1,0 +1,45 @@
+{
+  "name": "moneybag",
+  "version": "1.0.0",
+  "description": "者月钱包客户端",
+  "author": "csy",
+  "private": true,
+  "scripts": {
+    "dev": "vue-cli-service serve --mode development",
+    "test": "vue-cli-service serve --mode testing",
+    "prod": "vue-cli-service serve --mode production",
+    "dev-build": "vue-cli-service build --mode development",
+    "test-build": "vue-cli-service build --mode testing",
+    "prod-build": "vue-cli-service build --mode production",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "element-ui": "^2.4.11",
+    "es6-promise": "^4.2.5",
+    "fastclick": "^1.0.6",
+    "vue": "^2.5.21",
+    "vue-axios": "^2.1.4",
+    "vue-router": "^3.0.2",
+    "vue-wechat-title": "^2.0.5",
+    "vue-ydui": "^1.2.6",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.2.0",
+    "@vue/cli-plugin-eslint": "^3.2.0",
+    "@vue/cli-service": "^3.2.0",
+    "babel-eslint": "^10.0.1",
+    "escape-string-regexp": "^1.0.5",
+    "eslint": "^5.10.0",
+    "eslint-plugin-vue": "^5.0.0-0",
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0",
+    "vue-template-compiler": "^2.5.21"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}
