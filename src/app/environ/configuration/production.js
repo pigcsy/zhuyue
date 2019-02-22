@@ -7,6 +7,6 @@
  */
 export default {
     "server": {
-        "host": "http://moneybag.app.xianjinloan.com",
+        "host": "http://daichaoapi.xianjinloan.com",
     }
 };

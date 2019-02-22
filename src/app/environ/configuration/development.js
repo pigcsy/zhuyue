@@ -7,6 +7,6 @@
  */
 export default {
     "server": {
-        "host": "http://127.0.0.1:9999",
+        "host": "http://daichaoapi.xianjinloan.com",
     }
 };
