@@ -3,7 +3,7 @@
  * @JsName axios
  * @Description axios 请求库.
  * @DateTime 2018-12-22 20:39:22
- * @author csy
+ * @author 花花
  */
 import axios from "axios";
 import Method from './method';
@@ -17,7 +17,7 @@ import Method from './method';
 const HandleUrl = (url, options) => {
 	let result = url;
 	const { method, params } = options;
-	if (Method.Get === method) {
+	if (Method.Get === method || Method.Delete === method) {
 		for (const key in params) {
 			let keys = "{".concat(key).concat("}");
 			if (url.indexOf(keys) > -1) {

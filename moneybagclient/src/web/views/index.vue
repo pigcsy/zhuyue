@@ -1,145 +1,158 @@
 <!--
   - index Vue
   - @JsName index
-  - @Description Index 首页视图
+  - @Description 首页视图.
   - @DateTime 2018-12-22 20:39:22
-  - @author csy
+  - @author 花花
   -->
 <!-- 视图 -->  
 <template>
-    <yd-infinitescroll :callback="loadingMore" ref="infinitescroll" id="index" v-loading.fullscreen.lock="loading">
-        <yd-list slot="list">
-            <div class="headline">{{headline}}</div>
-            <mu-app-item v-for="(item, index) in data" v-bind:key="index" v-bind:item="item" v-bind:applyForText="applyForText" v-on:jumpPage="jumpPage"></mu-app-item>
-        </yd-list>
-        <!-- 数据全部加载完毕显示 -->
-        <span slot="doneTip">{{completeText}} </span>
-        <!-- 加载中提示，不指定，将显示默认加载中图标 -->
-        <!-- <img slot="loadingTip" src="http://static.ydcss.com/uploads/ydui/loading/loading10.svg"/> -->
-    </yd-infinitescroll>
+    <div id="backend">
+        <el-container direction="horizontal">
+            <!-- 菜单 -->
+            <el-aside id="asidemenu">
+                <el-container direction="vertical">
+                    <el-header>
+                        <div id="sign" @click="jumpPage('/backend')"><font><strong>a</strong></font></div>
+                    </el-header>
+                    <el-main>
+                        <div class="menu dns" @click="jumpPage('/backend/goods')"><i class="material-icons">dns</i></div>
+                        <div class="menu contacts" @click="jumpPage('/backend/user')"><i class="material-icons">contacts</i></div>
+                        <div class="menu album" @click="jumpPage('/backend/configuration')"><i class="material-icons">album</i></div>
+                    </el-main>
+                    <el-footer>
+                        <div id="avatar" @click="jumpPage('/backend/panel')"><img v-bind:src="avatar"></div>
+                    </el-footer>
+                </el-container>
+            </el-aside>
+            <!-- 内容 -->
+            <el-main id="views">
+                <transition>
+                    <router-view></router-view>
+                </transition>
+            </el-main>
+        </el-container>
+    </div>
 </template>
 
 <!-- 视图 Js 脚本 -->  
 <script>
-import { Toast } from "vue-ydui/dist/lib.rem/dialog";
-import { Goods } from "@/app/module/lending";
-import { Configure } from "@/app/module/configure";
-import { AppItem } from "@/app/components";
+
 export default {
-    name: 'index',
+    name: 'backend',
     components: {
-        "mu-app-item": AppItem,
     },
     data () {
         return {
-            loading: true,
-            applyForText: "立即申请",
-            headline: "· 热门推荐 ·",
-            completeText: "没有数据啦 >_<",
-            param: {
-                "page": 1
-            },
-            data: [],
+            "avatar": "http://money-bag.oss-cn-hangzhou.aliyuncs.com/user/portrait/Portrait.png"        
         }
     },
     methods: {
-        /**
-         * 加载更多
-         */
-        loadingMore () {
-            const that = this; 
-            setTimeout(() => {
-                Goods.obtain({ ...that.param }).then((res) => {
-                    that.loading = false;
-                    if (res) {
-                        if (res.code === 10001) {
-                            const { data, isFinish } = res.data;
-                            that.data = [...that.data, ...data];
-                            if (isFinish) {
-                                /* 全部数据加载完成 */
-                                that.$refs.infinitescroll.$emit('ydui.infinitescroll.loadedDone');
-                                return;
-                            } else {
-                                /* 单次请求数据完成 */
-                                that.$refs.infinitescroll.$emit('ydui.infinitescroll.finishLoad');
-                                that.param.page++;
-                            }
-                        } else {
-                            Toast({ mes: "加载失败 , ".concat(res.result), timeout: 3000});
-                        }
-                    }
-                }, (err) => {
-                    Toast({ mes: "加载失败 , 网络异常", timeout: 3000});
-                    console.error(err);
-                });
-            }, 500);
-        },
-        /**
-         * 跳转页面
-         */
-        jumpPage (url, id) {
-            Goods.count({ goodsId: id }).then((res) => {
-                if (res) {
-                    if (res.code === 10001) {
-                        window.location = url;
-                    } else {
-                        Toast({ mes: "加载失败 , ".concat(res.result), timeout: 3000});
-                    }
-                }
-            }, (err) => {
-                Toast({ mes: "加载失败 , 网络异常", timeout: 3000});
-                console.error(err);
-            }); 
+        jumpPage (url) {
+            const that = this;
+            that.$router.replace({ "path": url });
         },
     },
     beforeCreate () {
-        const that = this; 
-        Configure.obtain({ "code": "ApplyForText" }).then((res) => {
-            if (res) {
-                if (res.code === 10001) {
-                    that.applyForText =  res.data;   
-                } else {
-                    Toast({ mes: "加载失败 , ".concat(res.result), timeout: 3000});
-                }
-            }
-        }, (err) => {
-            Toast({ mes: "加载失败 , 网络异常", timeout: 3000});
-            console.error(err);
-        });
     },
     beforeMount () {
-        const that = this; 
-        // 加载数据
-        that.loadingMore();
     },
 };
 </script>
 
 <!-- 视图 Scss 样式 -->  
 <style lang="scss">
-#index {
-    margin: 0 auto;
-    padding: 0px;
-    cursor: pointer;
-    max-width: 515px;
-    background-color: #F3F3F4;
-    .headline {
-        color: #3c3a3a;
-        font-size: 0.98rem;
-        font-weight: 400;
-        text-align: center;
-        padding: .85rem 0 0 0;
-    };
-    svg {
-        width: 2.0rem;
-        height: 2.0rem;
-        margin-bottom: 2.0rem;
-    };
-    .yd-list-donetip {
-        color: #babfc6;
-        font-size: .75rem;
-        text-align: center;
-        padding: .25rem 0 .75rem 0;
+#backend {
+    width: 100%;
+    height: 100%;
+    .el-container {
+        width: 100%;
+        height: 100%;
+        #asidemenu {
+            width: 72px !important;
+            background-color: #121822;
+            text-align: center;
+            user-select: none;
+            -ms-user-select: none;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            .el-container {
+                width: 100%;
+                height: 100%;
+                .el-header {
+                    padding: 0;
+                    height: 80px !important; 
+                    #sign {
+                        cursor: pointer;
+                        width: 38px;
+                        height: 38px;
+                        border-radius: 19px;
+                        margin: 20px auto 0px;
+                        padding: 0;
+                        background-color: #5B626C;
+                        font {
+                            color: #FFFFFF;
+                            font-size: 31px;
+                            font-family: "material-icons";
+                            font-weight: 900;
+                            line-height: 31px;
+                        };
+                    };   
+                };
+                .el-main {
+                    padding: 0;
+                    text-align: center;
+                    background-color: #121822;
+                    .menu {
+                        width: 44px;
+                        height: 44px;
+                        border-radius: 22px;
+                        margin: 5px auto 15px;
+                        padding: 0;
+                        cursor: pointer;
+                        .material-icons {
+                            font-size: 18px;
+                            color: #FFFFFF;
+                            line-height: 44px;
+                        };
+                    };
+                    .menu.dashboard {
+                        background-color: #33CC33;
+                    }; 
+                    .menu.dns {
+                        background-color: #57B275;
+                    };  
+                    .menu.contacts {
+                        background-color: #4696EC;
+                    };
+                    .menu.album {
+                        background-color: #DC3743;
+                    }; 
+                };
+                .el-footer {
+                    padding: 0;
+                    height: 90px !important; 
+                    #avatar {
+                        cursor: pointer;
+                        width: 44px;
+                        height: 44px;
+                        border-radius: 22px;
+                        margin: 5px auto 15px;
+                        background-color: #5B626C;
+                        img {
+                            width: 44px;
+                            height: 44px;
+                        };
+                    };
+                };
+            };
+        };
+        #views {
+            background-color: #F5F5F5;
+            padding: 0;
+            text-align: center;
+        };
     };
 };
 </style>

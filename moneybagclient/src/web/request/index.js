@@ -3,7 +3,7 @@
  * @JsName index
  * @Description Request 请求库.
  * @DateTime 2018-12-22 20:39:22
- * @author csy
+ * @author 花花
  */
 import { AxiosJs } from "@/extend";
 import { Service } from "../environ";
@@ -17,7 +17,7 @@ const { axios, Axios, AxiosGet, AxiosPut, AxiosPost, AxiosHead, AxiosPatch, Axio
 /**
  * 定义 Key 常量
  */
-const Key = "$WebKey";
+const Key = "$BackendKey";
 
 /**
  * 指定请求超时的毫秒数, 如果请求比 timeout 长, 请求将被中止
@@ -56,7 +56,7 @@ axios.interceptors.response.use((res) => {
         axios.defaults.headers.common["Token"] = localStorage.getItem(Key);
         delete res.data["data"];
     } else if (res.data.code === 10008 || res.data.code === 10012) {
-        Router.push({ "path": "/login" });
+        Router.push({ "path": "/backend/login" });
         delete res["data"];
     }
     return res;
@@ -69,5 +69,5 @@ axios.interceptors.response.use((res) => {
  * -- 导出清单
  * - Axios（ 请求库 ）
  */
-export { Axios, AxiosGet, AxiosPut, AxiosPost, AxiosHead, AxiosPatch, AxiosDelete, AxiosOptions, Method };
-export default { Axios, AxiosGet, AxiosPut, AxiosPost, AxiosHead, AxiosPatch, AxiosDelete, AxiosOptions, Method };
+export { Axios, AxiosGet, AxiosPut, AxiosPost, AxiosHead, AxiosPatch, AxiosDelete, AxiosOptions, Method, Service };
+export default { Axios, AxiosGet, AxiosPut, AxiosPost, AxiosHead, AxiosPatch, AxiosDelete, AxiosOptions, Method, Service };

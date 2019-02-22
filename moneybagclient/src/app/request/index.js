@@ -3,7 +3,7 @@
  * @JsName index
  * @Description Request 请求库.
  * @DateTime 2018-12-22 20:39:22
- * @author csy
+ * @author 花花
  */
 import { AxiosJs } from "@/extend";
 import { Service } from "../environ";

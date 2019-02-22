@@ -1,9 +1,9 @@
 <!--
   - login Vue
   - @JsName login
-  - @Description login 登录视图
+  - @Description 登录视图.
   - @DateTime 2018-12-22 20:39:22
-  - @author csy
+  - @author 花花
   -->
 <!-- 视图 -->  
 <template>
@@ -22,13 +22,15 @@
 
 <!-- 视图 Js 脚本 -->  
 <script>
+import { Encoding } from "@/tools";
+import { Owner } from "@/web/module/owner";
 export default {
-    name: "weblogin",
+    name: "backend-login",
     components: {
     },
     data () {
         return {
-            "caption": "统一登录",
+            "caption": "爱钱袋",
             "loginForm": {
                 "username": "",
                 "password": "",
@@ -38,34 +40,67 @@ export default {
         }
     },
     methods: {
+        /**
+         * 登录
+         */
         logIn () {
-            // 者月钱包
+            const that = this;  
+            if (that.validator()) {
+                that.buttonName = "登录中"; 
+                that.isSubmit = true;
+                Owner.logIn({ "userName": that.loginForm.username, "password": Encoding.rsaEncrypt(that.loginForm.password) }).then((res) => {
+                    if (res.code === 10001) {
+                        that.showMessage("success", 1000, "登录成功", () => {
+                            that.buttonName = "登录"; 
+                            that.isSubmit = false;
+                            that.$router.push({ "path": "/backend" });
+                        });
+                    } else {
+                        that.showMessage("warning", 1500, "登陆失败 , ".concat(res.result), () => {
+                            that.buttonName = "登录"; 
+                            that.isSubmit = false;
+                        });
+                    }    
+                }, (err) => {
+                    that.showMessage("warning", 1500, "登录失败 , 网络异常", () => {
+                        that.buttonName = "登录"; 
+                        that.isSubmit = false;
+                    });
+                    console.error(err);
+                });   
+            }
+        },
+        /**
+         * 显示消息
+         */
+        showMessage (type, duration, message, callback) {
             const that = this; 
-            const result = that.$refs.mobile;
-            if (result.valid) {
-                that.loading = true;
-                that.disabled = true;
-                setTimeout(() => {
-                    User.logIn({ "mobile": that.mobile }).then((res) => {
-                        if (res.code === 10001) {
-                            Notify({ mes: "登录成功", timeout: 2000, callback: () => {
-                                that.loading = false;
-                                that.$router.push({ "path": "/" });
-                            }});  
-                        } else {
-                            Notify({ mes: "加载失败 , ".concat(res.result), timeout: 3000});
-                            that.disabled = false;
-                            that.loading = false;
-                        }
-                    }, (err) => {
-                        Notify({ mes: "加载失败 , 网络异常", timeout: 3000});
-                        that.disabled = false;
-                        that.loading = false;
-                        console.error(err);
-                    });   
-                }, 500);
+            that.$message({
+                type: type,
+                center: true,
+                duration: duration,
+                showClose: false,
+                message: message,
+                onClose: (element) => {
+                    if (callback) {
+                        callback(element)
+                    }
+                },
+            })
+        },
+        /**
+         * 验证
+         */
+        validator () {
+            const that = this; 
+            if (that.loginForm.username === '' || that.loginForm.username === undefined) {
+                that.showMessage("info", 2000, "请输入用户名  !!!"); 
+                return false;
+            } else if (that.loginForm.password === '' || that.loginForm.password === undefined) {
+                that.showMessage("info", 2000, "请输入用户凭证  !!!"); 
+                return false;
             } else {
-                Notify({ mes: ((result.errorCode === "NOT_NULL") ? "手机号码不允许为空. " : "手机号码不正确. "), timeout: 100000});
+                return true;
             }
         },
     },

@@ -3,7 +3,7 @@
  * @JsName mu-app-item
  * @Description mu-app-item（ 列表子项目 :: 贷超 ）自定义组件 Js 脚本.
  * @DateTime 2018-12-22 20:39:22
- * @author csy
+ * @author 花花
  */
 export default {
     name: "mu-app-item",

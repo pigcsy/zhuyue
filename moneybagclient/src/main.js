@@ -3,7 +3,7 @@
  * @JsName main
  * @Description Vue 程序入口
  * @DateTime 2018-12-22 20:39:22
- * @author csy
+ * @author 花花
  */
 import Vue from "vue";
 import Vuex from "vuex";
@@ -19,6 +19,7 @@ import Router from "@/router";
 import "es6-promise/auto";
 import "element-ui/lib/theme-chalk/index.css";
 import "vue-ydui/dist/ydui.rem.css";
+import "material-design-icons/iconfont/material-icons.css";
 
 /**
  * 关闭生产模式下给出的提示
@@ -65,7 +66,7 @@ Vue.use(VueWechatTitle);
  */
 Router.beforeEach((to, from, next) => {
     // 判断是否匹配到路由 ? 如果未匹配 , 匹配上级 , 上级也未匹配到则跳转登录页面 : 如果匹配到则正确跳转
-    to.matched.length === 0 ? from.name ? next({ name: from.name }) : next('/') : next()
+    to.matched.length === 0 ? (from.name ? next({ name: from.name }) : ((to.fullPath && to.fullPath.substring(0, 8) === "/backend") ? next("/backend") : next("/"))) : next();
 });
 
 /**

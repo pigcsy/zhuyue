@@ -3,7 +3,7 @@
  * @JsName index
  * @Description 贷款产品（ 模块 ）服务.
  * @DateTime 2018-12-22 20:39:22
- * @author csy
+ * @author 花花
  */
 // 引入 GoodsAPI 库
 import GoodsAPI from "../api";

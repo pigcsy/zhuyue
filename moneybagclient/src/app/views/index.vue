@@ -1,9 +1,9 @@
 <!--
   - index Vue
   - @JsName index
-  - @Description Index 首页视图
+  - @Description 首页视图.
   - @DateTime 2018-12-22 20:39:22
-  - @author csy
+  - @author 花花
   -->
 <!-- 视图 -->  
 <template>
@@ -37,7 +37,7 @@ export default {
             "headline": "· 热门推荐 ·",
             "completeText": "没有数据啦 >_<",
             "param": {
-                "page": 1
+                "page": 1,
             },
             "data": [],
         }

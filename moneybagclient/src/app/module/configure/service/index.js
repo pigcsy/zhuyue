@@ -3,7 +3,7 @@
  * @JsName index
  * @Description 配置信息（ 模块 ）服务.
  * @DateTime 2018-12-22 20:39:22
- * @author csy
+ * @author 花花
  */
 // 引入 ConfigureAPI 库
 import ConfigureAPI from "../api";

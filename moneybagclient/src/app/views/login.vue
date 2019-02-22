@@ -1,9 +1,9 @@
 <!--
   - login Vue
   - @JsName login
-  - @Description login 登录视图
+  - @Description 登录视图.
   - @DateTime 2018-12-22 20:39:22
-  - @author csy
+  - @author 花花
   -->
 <!-- 视图 -->  
 <template>
@@ -31,6 +31,9 @@ export default {
         }
     },
     methods: {
+        /**
+         * 登录
+         */
         logIn () {
             const that = this; 
             const result = that.$refs.mobile;
@@ -45,12 +48,12 @@ export default {
                                 that.$router.push({ "path": "/" });
                             }});  
                         } else {
-                            Notify({ mes: "加载失败 , ".concat(res.result), timeout: 3000});
+                            Notify({ mes: "登录失败 , ".concat(res.result), timeout: 3000});
                             that.disabled = false;
                             that.loading = false;
                         }
                     }, (err) => {
-                        Notify({ mes: "加载失败 , 网络异常", timeout: 3000});
+                        Notify({ mes: "登录失败 , 网络异常", timeout: 3000});
                         that.disabled = false;
                         that.loading = false;
                         console.error(err);
