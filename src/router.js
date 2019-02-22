@@ -19,7 +19,7 @@ export default new VueRouter({
             "path": "/list",
             "name": "index",
             "meta": { 
-                "title": "爱钱袋" 
+                "title": "者月钱包"
             },
             "component": resolve => require(["@/app/views/index.vue"], resolve)
         },
@@ -35,7 +35,7 @@ export default new VueRouter({
             "path": "/backend",
             "name": "backend",
             "meta": { 
-                "title": "爱钱袋" 
+                "title": "者月钱包"
             },
             "redirect": () => { // 重定向到路由
                 return "/backend/goods";

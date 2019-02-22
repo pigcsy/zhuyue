@@ -30,7 +30,7 @@ export default {
     },
     data () {
         return {
-            "caption": "爱钱袋",
+            "caption": "者月钱包",
             "loginForm": {
                 "username": "",
                 "password": "",
