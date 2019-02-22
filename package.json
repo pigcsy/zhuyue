@@ -1,8 +1,8 @@
 {
   "name": "moneybag",
   "version": "1.0.0",
-  "description": "爱钱袋客户端",
-  "author": "花花",
+  "description": "者月钱包客户端",
+  "author": "",
   "private": true,
   "scripts": {
     "dev": "vue-cli-service serve --mode development",

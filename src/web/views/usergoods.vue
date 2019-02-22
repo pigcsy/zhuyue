@@ -3,7 +3,7 @@
   - @JsName usergoods
   - @Description 产品视图 :: 用户产品.
   - @DateTime 2018-12-22 20:39:22
-  - @author 花花
+  - @author
   -->
 <!-- 视图 -->  
 <template>

@@ -3,7 +3,7 @@
  * @JsName main
  * @Description Vue 程序入口
  * @DateTime 2018-12-22 20:39:22
- * @author 花花
+ * @author 
  */
 import Vue from "vue";
 import Vuex from "vuex";

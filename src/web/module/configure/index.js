@@ -3,7 +3,7 @@
  * @JsName index
  * @Description Configure 配置信息（ 模块 ）服务.
  * @DateTime 2018-12-22 20:39:22
- * @author 花花
+ * @author 
  */
 import Configure from "./service";
 

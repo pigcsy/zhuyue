@@ -3,7 +3,7 @@
  * @JsName axios
  * @Description axios 请求库.
  * @DateTime 2018-12-22 20:39:22
- * @author 花花
+ * @author 
  */
 import axios from "axios";
 import Method from './method';

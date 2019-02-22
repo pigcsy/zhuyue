@@ -3,7 +3,7 @@
   - @JsName configuration
   - @Description 配置视图.
   - @DateTime 2018-12-22 20:39:22
-  - @author 花花
+  - @author
   -->
 <!-- 视图 -->  
 <template>
