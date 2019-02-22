@@ -1,21 +1,21 @@
 # hello-world
 
-## Project setup
+## 安装依赖包
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 开发环境编译开发
 ```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
+npm run dev
 ```
 
-### Run your tests
+### 打包生产环境
+```
+npm run prod-build
+```
+
+### 运行你的测试
 ```
 npm run test
 ```
