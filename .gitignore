@@ -19,3 +19,12 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
+
+# Local validation artifacts (tracked dist remains unchanged)
+.checks-dist/
+.ci-yarn-cache/
+.check-reports/
+playwright-report/
+test-results/
+.serena/cache/
+__pycache__/

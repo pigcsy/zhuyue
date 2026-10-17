@@ -1,0 +1,52 @@
+name: Project checks
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: checks-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  project-checks:
+    name: project-checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      YARN_CACHE_FOLDER: .ci-yarn-cache
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24.22.0'
+      - name: Reuse locked dependency downloads
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ${{ env.YARN_CACHE_FOLDER }}
+          key: ${{ runner.os }}-${{ runner.arch }}-node24-yarn1-${{ hashFiles('yarn.lock') }}
+      - name: Install locked dependencies without lifecycle scripts
+        run: npm exec --yes --package=yarn@1.22.22 -- yarn install --frozen-lockfile --ignore-scripts --non-interactive
+      - name: Install CI browser
+        run: node node_modules/@playwright/test/cli.js install --with-deps chromium
+      - name: Run the same project-defined gate as local development
+        run: python scripts/run_checks.py --tier full --report .check-reports/full.json
+      - name: Preserve check evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: project-check-evidence
+          path: |
+            .check-reports/
+            test-results/
+          retention-days: 7
+          include-hidden-files: true
+          if-no-files-found: error
