@@ -29,7 +29,7 @@ python scripts/run_checks.py --tier full --report .check-reports/full.json
 
 ## CI 和已知限制
 
-`.github/workflows/checks.yml` 在 push / pull request 运行同一 full 检查入口，Actions 固定到已核对的提交，权限为 contents: read，证据保留 7 天。
+`.github/workflows/checks.yml` 在 master 的 push 和 pull request 运行同一 full 检查入口，避免功能分支重复运行；Actions 固定到已核对的提交，权限为 contents: read，证据保留 7 天。按系统、架构和锁文件缓存依赖下载，仍执行冻结安装和全部检查；上传范围限于检查报告与失败诊断，缺少报告会使 CI 失败。
 
 这是历史项目，旧依赖已关联多项公开漏洞，Browserslist 数据和 bundle 大小也有构建警告。构建、lint 或页面回归通过不代表漏洞已修复、安全审计通过或性能达标；应单独评估 Axios、Vue 及构建链的迁移和业务回归。
 
