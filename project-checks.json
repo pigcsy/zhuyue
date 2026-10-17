@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "inputs": [
+    "src/**/*.vue",
+    "src/**/*.js",
+    "src/**/*.scss",
+    "public/**/*",
+    "scripts/*",
+    "tests/e2e/*.cjs",
+    "package.json",
+    "yarn.lock",
+    "project-checks.json",
+    "playwright.config.cjs",
+    "vue.config.js",
+    ".eslintrc.js",
+    ".postcssrc.js",
+    "babel.config.js",
+    ".github/workflows/checks.yml",
+    "AGENTS.md",
+    "CLAUDE.md",
+    "README.md"
+  ],
+  "checks": [
+    {
+      "id": "lint",
+      "tiers": [
+        "quick",
+        "full",
+        "risk"
+      ],
+      "argv": [
+        "{node}",
+        "node_modules/@vue/cli-service/bin/vue-cli-service.js",
+        "lint",
+        "--no-fix",
+        "src",
+        "*.js",
+        "scripts/*.cjs",
+        "tests/**/*.cjs",
+        "playwright.config.cjs"
+      ],
+      "timeout_seconds": 120
+    },
+    {
+      "id": "production-build",
+      "tiers": [
+        "full",
+        "risk"
+      ],
+      "argv": [
+        "{node}",
+        "scripts/build-check.cjs"
+      ],
+      "timeout_seconds": 600
+    },
+    {
+      "id": "login-browser-regression",
+      "tiers": [
+        "full",
+        "risk"
+      ],
+      "argv": [
+        "{node}",
+        "node_modules/@playwright/test/cli.js",
+        "test"
+      ],
+      "timeout_seconds": 180
+    }
+  ]
+}

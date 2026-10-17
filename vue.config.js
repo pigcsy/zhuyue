@@ -1,4 +1,7 @@
 module.exports = {
+    css: {
+        loaderOptions: { sass: { implementation: require("sass") } },
+    },
     "devServer": {
         "hot": true,
         "host": "0.0.0.0",
